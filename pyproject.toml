@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "rec4you"
+version = "0.1.0"
+description = "Generate personalised product recommendations for each customer (For website or email)"
+authors = ["Fani Petropoulou <fanipetropoulou98@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+mlxtend = "^0.22.0"
+numpy = "1.24.0"
+pandas = "^1.5.3"
+pydantic = {version = "1.10.7", extras = ["dotenv"]}
+snowflake-connector-python = {version = "^3.0.3", extras = ["pandas"]}
+tqdm = "^4.66.1"
+
+[tool.poetry.scripts]
+rec4you = "rec4you.recommendation_engine.main:main"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+isort = "^5.12.0"
+interrogate = "^1.5.0"
+flake8 = "^6.1.0"
+pre-commit = "^3.5.0"
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+/(
+\.git
+| \.hg
+| \.mypy_cache
+| \.tox
+| \.venv
+| _build
+| buck-out
+| build
+)/
+'''
+
+[tool.isort]
+profile = "black"
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = true
+ignore-nested-functions = false
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 95
+exclude = ["setup.py", "docs", "build", "alembic", "tests"]
+ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
+verbose = 1
+quiet = false
+whitelist-regex = []
+color = true
